@@ -2,6 +2,7 @@ package lib;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import lib.configs.DriverProperties;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -17,8 +18,7 @@ public class Platform
     private static final String PLATFORM_IOS = "ios";
     private static final String PLATFORM_ANDROID = "android";
     private static final String PLATFORM_MOBILE_WEB = "mobile_web";
-//    private static final String APPIUM_URL_LOCAL = "http://127.0.0.1:4723/wd/hub";
-    private static final String APPIUM_URL = "https://oauth-k.yudin.qa-318a5:c18fd5c2-8bef-42f0-be0f-71b90bba223b@ondemand.eu-central-1.saucelabs.com:443/wd/hub";
+    private static final String APPIUM_URL = DriverProperties.getInstance().getAppiumUrl();
 
     private static Platform instance;
     private Platform(){}
@@ -67,7 +67,7 @@ public class Platform
         capabilities.setCapability("appPackage","org.wikipedia");
         capabilities.setCapability("appActivity",".main.MainActivity");
         capabilities.setCapability("orientation", "PORTRAIT");
-        capabilities.setCapability("app","/Users/konstantin/learnJavaAppium/JavaAppiumAutomation/apks/org.wikipedia.apk");
+        capabilities.setCapability("app",DriverProperties.getInstance().getAppBinaryPath());
         return capabilities;
     }
 
@@ -79,14 +79,14 @@ public class Platform
 //        capabilities.setCapability("platformVersion", "14.3");
 //        capabilities.setCapability("automationName", "Appium");
 //        capabilities.setCapability("orientation", "PORTRAIT");
-//        capabilities.setCapability("app", "/Users/kyudin/Automation/Wikipedia.app");
+//        capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
 
         MutableCapabilities caps = new MutableCapabilities();
         caps.setCapability("platformName","iOS");
-        caps.setCapability("appium:deviceName","iPhone Simulator");
+        caps.setCapability("appium:deviceName","iPhone 11 Pro Max Simulator");
         caps.setCapability("appium:deviceOrientation", "portrait");
-        caps.setCapability("appium:platformVersion","15.4");
-        caps.setCapability("appium:app", "storage:filename=Wikipedia.ipa");
+        caps.setCapability("appium:platformVersion","14.4");
+        caps.setCapability("appium:app", DriverProperties.getInstance().getAppBinaryPath());
         return caps;
     }
 
@@ -109,7 +109,7 @@ public class Platform
 
     public String getPlatformVar()
     {
-        return System.getenv("PLATFORM");
+        return DriverProperties.getInstance().getPlatform();
     }
 
     private boolean isPlatform(String my_platform)
