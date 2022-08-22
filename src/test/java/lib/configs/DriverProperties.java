@@ -30,14 +30,8 @@ public class DriverProperties {
             if (!appiumURL.contains("$")) {
                 return appiumURL;
             }
-            if (System.getProperty("DEVICE.FARM.URL") != null) {
-                return appiumURL.replace("${deviceFarmURL}", System.getProperty("DEVICE.FARM.URL"));
-            }
-            System.out.println(" Device farm didn't find valid URL :  " + this.properties.getProperty("APPIUM.URL"));
-        } else {
-            System.out.println(" Device farm URL is missing :  " + this.properties.getProperty("APPIUM.URL"));
         }
-        return "";
+        return System.getenv("DEVICE_FARM_URL");
     }
 
     public String getPlatform() {
@@ -45,22 +39,14 @@ public class DriverProperties {
         if (platform != null && !platform.contains("$")) {
             return platform;
         }
-        if (System.getProperty("PLATFORM") != null) {
-            return platform.replace("${platform}", System.getProperty("PLATFORM"));
-        }
-        System.out.println(" Platform value is missing :  " + this.properties.getProperty("PLATFORM"));
-        return "";
+        else
+            return System.getenv("PLATFORM");
     }
 
     public String getAppBinaryPath() {
         if (this.properties.getProperty("APP.PATH") != null && !this.properties.getProperty("APP.PATH").contains("$")) {
             return this.properties.getProperty("APP.PATH");
         }
-        if (System.getProperty("APP.PATH") != null) {
-            return this.properties.getProperty("APP.PATH").replace("${appBinaryPath}", System.getProperty("APP.PATH"));
-        } else {
-            System.out.println(" App path is missing :  " + this.properties.getProperty("APP.PATH"));
-            return "";
-        }
+        return System.getenv("APP_PATH");
     }
 }
