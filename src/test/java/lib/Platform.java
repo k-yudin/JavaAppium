@@ -77,12 +77,11 @@ public class Platform
         String host = DriverProperties.getInstance().getHost();
         switch (host) {
             case "saucelabs":
-                capabilities.setCapability("platformName", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
-                capabilities.setCapability("deviceName", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
-                capabilities.setCapability("platformVersion", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
-                capabilities.setCapability("orientation", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("platformName", System.getenv("iOS"));
+                capabilities.setCapability("deviceName", System.getenv("SELENIUM_DEVICE"));
+                //capabilities.setCapability("platformVersion", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("orientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
                 capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
-                capabilities.setCapability("build", System.getenv("SAUCE_BUILD_NAME"));
                 break;
             case "local":
                 capabilities.setCapability("platformName", "iOS");
