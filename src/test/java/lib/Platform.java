@@ -79,7 +79,7 @@ public class Platform
             case "saucelabs":
                 capabilities.setCapability("platformName", System.getenv("iOS"));
                 capabilities.setCapability("deviceName", System.getenv("SELENIUM_DEVICE"));
-                //capabilities.setCapability("platformVersion", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("platformVersion", System.getenv("SELENIUM_VERSION"));
                 capabilities.setCapability("orientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
                 capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
                 break;
