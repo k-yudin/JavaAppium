@@ -73,21 +73,25 @@ public class Platform
 
     private MutableCapabilities getIOSDesiredCapabilities()
     {
-//        DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("platformName", "iOS");
-//        capabilities.setCapability("deviceName", "iPhone 8");
-//        capabilities.setCapability("platformVersion", "14.3");
-//        capabilities.setCapability("automationName", "Appium");
-//        capabilities.setCapability("orientation", "PORTRAIT");
-//        capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
-
-        MutableCapabilities caps = new MutableCapabilities();
-        caps.setCapability("platformName","iOS");
-        caps.setCapability("appium:deviceName","iPhone 11 Pro Max Simulator");
-        caps.setCapability("appium:deviceOrientation", "portrait");
-        caps.setCapability("appium:platformVersion","14.4");
-        caps.setCapability("appium:app", DriverProperties.getInstance().getAppBinaryPath());
-        return caps;
+        MutableCapabilities capabilities = new MutableCapabilities();
+        String host = DriverProperties.getInstance().getHost();
+        switch (host) {
+            case "saucelabs":
+                capabilities.setCapability("platformName", "iOS");
+                capabilities.setCapability("deviceName", "iPhone 8 Simulator");
+                capabilities.setCapability("platformVersion", "14.3");
+                capabilities.setCapability("orientation", "PORTRAIT");
+                capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
+                break;
+            case "local":
+                capabilities.setCapability("platformName", "iOS");
+                capabilities.setCapability("deviceName", "iPhone 8");
+                capabilities.setCapability("platformVersion", "14.3");
+                capabilities.setCapability("orientation", "PORTRAIT");
+                capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
+                break;
+        }
+        return capabilities;
     }
 
     private ChromeOptions getMyChromeOptions()
