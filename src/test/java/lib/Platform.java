@@ -77,9 +77,9 @@ public class Platform
         String host = DriverProperties.getInstance().getHost();
         switch (host) {
             case "saucelabs":
-                capabilities.setCapability("platformName", System.getenv("iOS"));
+                capabilities.setCapability("platformName", "iOS");
                 capabilities.setCapability("deviceName", System.getenv("SELENIUM_DEVICE"));
-                capabilities.setCapability("platformVersion", System.getenv("SELENIUM_DRIVER"));
+                //capabilities.setCapability("platformVersion", System.getenv("SELENIUM_DRIVER"));
                 capabilities.setCapability("orientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
                 capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
                 break;
