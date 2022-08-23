@@ -77,11 +77,12 @@ public class Platform
         String host = DriverProperties.getInstance().getHost();
         switch (host) {
             case "saucelabs":
-                capabilities.setCapability("platformName", "iOS");
-                capabilities.setCapability("deviceName", "iPhone 8 Simulator");
-                capabilities.setCapability("platformVersion", "14.3");
-                capabilities.setCapability("orientation", "PORTRAIT");
+                capabilities.setCapability("platformName", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("deviceName", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("platformVersion", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
+                capabilities.setCapability("orientation", System.getenv("SAUCE_ONDEMAND_BROWSERS"));
                 capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
+                capabilities.setCapability("build", System.getenv("SAUCE_BUILD_NAME"));
                 break;
             case "local":
                 capabilities.setCapability("platformName", "iOS");
