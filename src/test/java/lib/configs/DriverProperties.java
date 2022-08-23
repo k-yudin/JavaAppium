@@ -49,4 +49,6 @@ public class DriverProperties {
         }
         return System.getenv("APP_PATH");
     }
+
+    public String getHost() { return System.getenv("host"); }
 }
