@@ -25,7 +25,7 @@ public class CoreTestCase extends TestCase
     @Override
     protected void tearDown() throws Exception
     {
-        printSessionId();
+        printSessionIdAndTestName();
         driver.quit();
         super.tearDown();
     }
@@ -91,9 +91,9 @@ public class CoreTestCase extends TestCase
         }
     }
 
-    private void printSessionId() {
+    private void printSessionIdAndTestName() {
         String message = String.format("SauceOnDemandSessionID=%1$s job-name=%2$s",
-                ((driver).getSessionId()).toString(), "some job name");
+                ((driver).getSessionId()).toString(), getName());
         System.out.println(message);
     }
 }
