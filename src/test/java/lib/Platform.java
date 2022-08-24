@@ -78,10 +78,10 @@ public class Platform
         switch (host) {
             case "saucelabs":
                 capabilities.setCapability("platformName", "iOS");
-                capabilities.setCapability("deviceName", "iPhone Simulator");
-                capabilities.setCapability("platformVersion", "13");
-                capabilities.setCapability("orientation", "PORTRAIT");
-                capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
+                capabilities.setCapability("appium:deviceName", System.getenv("SELENIUM_DEVICE"));
+                capabilities.setCapability("appium:platformVersion", System.getenv("SELENIUM_VERSION"));
+                capabilities.setCapability("appium:deviceOrientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
+                capabilities.setCapability("appium:app", DriverProperties.getInstance().getAppBinaryPath());
                 break;
             case "local":
                 capabilities.setCapability("platformName", "iOS");
