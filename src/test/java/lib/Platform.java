@@ -78,9 +78,9 @@ public class Platform
         switch (host) {
             case "saucelabs":
                 capabilities.setCapability("platformName", "iOS");
-                capabilities.setCapability("deviceName", System.getenv("SELENIUM_DEVICE"));
-                //capabilities.setCapability("platformVersion", System.getenv("SELENIUM_DRIVER"));
-                capabilities.setCapability("orientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
+                capabilities.setCapability("deviceName", "iPhone Simulator");
+                capabilities.setCapability("platformVersion", "13");
+                capabilities.setCapability("orientation", "PORTRAIT");
                 capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
                 break;
             case "local":
