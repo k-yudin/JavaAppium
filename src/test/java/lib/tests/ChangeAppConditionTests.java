@@ -1,5 +1,10 @@
 package lib.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.ArticlePageObject;
@@ -8,8 +13,12 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
+@Epic("App Conditions Tests")
 public class ChangeAppConditionTests extends CoreTestCase
 {
+    @DisplayName("Background app")
+    @Description("Background - foreground app will show valid article")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testSearchArticleInBackground() {
 
@@ -22,6 +31,9 @@ public class ChangeAppConditionTests extends CoreTestCase
         searchPageObject.waitForSearchResult("Object-oriented programming language");
     }
 
+    @DisplayName("Change screen orientation")
+    @Description("Search results list remains same after device orientation changes")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testChangeScreenOrientationOnSearchResults() {
 

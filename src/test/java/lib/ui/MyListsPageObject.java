@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -18,6 +19,7 @@ abstract public class MyListsPageObject extends MainPageObject
         super(driver);
     }
 
+    /* TEMPLATES METHODS */
     private static String getSavedArticleXPathByTitle(String article_title)
     {
         return ARTICLE_BY_TITLE_TPL.replace("{TITLE}", article_title);
@@ -32,7 +34,9 @@ abstract public class MyListsPageObject extends MainPageObject
     {
         return FOLDER_BY_NAME_TPL.replace("{FOLDER_NAME}", name_of_folder);
     }
+    /* TEMPLATES METHODS */
 
+    @Step("Tap to open folder by name: {0}")
     public void openFolderByName(String name_of_folder)
     {
         String folder_name_xpath = getFolderXPathByName(name_of_folder);
@@ -40,7 +44,7 @@ abstract public class MyListsPageObject extends MainPageObject
                 "Cannot find folder by namer" + name_of_folder,
                 5);
     }
-
+    @Step("Swipe to delete saved item")
     public void swipeByArticleToDelete(String article_title)
     {
         this.waitForArticleToAppearByTitle(article_title);
@@ -64,29 +68,34 @@ abstract public class MyListsPageObject extends MainPageObject
         this.waitForArticleToDisAppearByTitle(article_title);
     }
 
+    @Step("Wait for article to disappear by title: {0} ")
     public void waitForArticleToDisAppearByTitle(String article_title)
     {
         String article_xpath = getSavedArticleXPathByTitle(article_title);
         this.waitForElementNotPresent(article_xpath, "Saved article is still present with title" + article_title, 15);
     }
 
+    @Step("Wait for saved article to appear: {0}")
     public void waitForArticleToAppearByTitle(String article_title)
     {
         String article_xpath = getSavedArticleXPathByTitle(article_title);
         this.waitForElementPresence(article_xpath, "Cannot find saved article by title" + article_title, 15);
     }
 
+    @Step("Tap to open saved article")
     public void openSavedArticleInFolder()
     {
         this.waitForElementPresence(SAVED_ARTICLE, "Cannot find saved article in the list", 15);
         this.waitForElementAndClick(SAVED_ARTICLE, "Cannot click on saved article in the list", 5);
     }
 
+    @Step("Tap to close sync dialog")
     public void closeSyncDialog()
     {
         this.waitForElementAndClick(CLOSE_SYNC_BUTTON, "Cannot close sync overlay", 5);
     }
 
+    @Step("Verify that saved button is present")
     public void checkSavedItemIsPresent()
     {
         this.waitForElementPresence(ARTICLE_SAVED_BUTTON, "Article is marked as not saved in favourites", 5);

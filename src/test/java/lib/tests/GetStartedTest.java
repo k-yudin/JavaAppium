@@ -1,12 +1,21 @@
 package lib.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.WelcomePageObject;
 import org.junit.Test;
 
+@Epic("Welcome Screen Tests")
 public class GetStartedTest extends CoreTestCase
 {
+    @DisplayName("Pass through welcome screen")
+    @Description("Go throughout all screen of welcome feature at app launch")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testPassThroughWelcome()
     {
@@ -24,6 +33,6 @@ public class GetStartedTest extends CoreTestCase
         welcomePageObject.clickNextButton();
 
         welcomePageObject.waitForDataCollectedText();
-        welcomePageObject.clicGetStartedButton();
+        welcomePageObject.clickGetStartedButton();
     }
 }

@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -14,6 +15,7 @@ abstract public class NavigationUI extends MainPageObject
         super(driver);
     }
 
+    @Step("Tap on menu button")
     public void openNavigation()
     {
         if (Platform.getInstance().isMW())
@@ -27,6 +29,7 @@ abstract public class NavigationUI extends MainPageObject
         }
     }
 
+    @Step("Tap to open my list")
     public void clickMyLists()
     {
         if (Platform.getInstance().isMW())
