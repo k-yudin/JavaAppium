@@ -1,5 +1,10 @@
 package lib.tests;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.Platform;
 import lib.ui.*;
@@ -9,6 +14,7 @@ import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
+@Epic("My List Tests")
 public class MyListTests extends CoreTestCase
 {
     private static final String name_of_folder = "Learning programming";
@@ -16,7 +22,9 @@ public class MyListTests extends CoreTestCase
         login = "K.yudin",
         password = "KYmb45kC!w";
 
-
+    @DisplayName("Save article to my list")
+    @Description("Save 1 article to my list and delete it after that")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testSaveFirstArticleToMyList() {
 
@@ -66,9 +74,11 @@ public class MyListTests extends CoreTestCase
         }
 
         myListsPageObject.swipeByArticleToDelete(article_title);
-
     }
 
+    @DisplayName("Save articles to my list")
+    @Description("Save several articles to my list")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testSaveTwoArticles() {
 
@@ -143,6 +153,5 @@ public class MyListTests extends CoreTestCase
                     list_item_title,
                     article_title);
         }
-
     }
 }

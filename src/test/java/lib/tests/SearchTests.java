@@ -1,5 +1,7 @@
 package lib.tests;
 
+import io.qameta.allure.*;
+import io.qameta.allure.junit4.DisplayName;
 import lib.CoreTestCase;
 import lib.ui.ArticlePageObject;
 import lib.ui.SearchPageObject;
@@ -7,8 +9,12 @@ import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
 
+@Epic("Search Tests")
 public class SearchTests extends CoreTestCase
 {
+    @DisplayName("Simple search")
+    @Description("Specify valid search query => results are displayed")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testSearch()
     {
@@ -18,6 +24,9 @@ public class SearchTests extends CoreTestCase
         searchPageObject.waitForSearchResult("bject-oriented programming language");
     }
 
+    @DisplayName("Cancel search")
+    @Description("There is no cancel button after tap on it")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testCancelSearch()
     {
@@ -28,6 +37,9 @@ public class SearchTests extends CoreTestCase
         searchPageObject.waitForCancelButtonToDisAppear();
     }
 
+    @DisplayName("Cancel search and check articles count")
+    @Description("After search cancellation there are no search results")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testCancelSearchWithAssertArticlesCount() {
 
@@ -46,6 +58,9 @@ public class SearchTests extends CoreTestCase
 
     }
 
+    @DisplayName("1 Search Result")
+    @Description("There is only 1 search result after specifying valid search query")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testAmountOfNotEmptySearch() {
 
@@ -59,6 +74,9 @@ public class SearchTests extends CoreTestCase
         assertTrue("We found too few results", amount_fo_search_results > 0);
     }
 
+    @DisplayName("Invalid search query")
+    @Description("Specify invalid search query => message is displayed")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testAmountOfEmptySearch() {
 
@@ -70,6 +88,9 @@ public class SearchTests extends CoreTestCase
         searchPageObject.assertNoResultSearch();
     }
 
+    @DisplayName("Article title")
+    @Description("Article title from search results list matches the one from article details screen")
+    @Severity(SeverityLevel.NORMAL)
     @Test
     public void testTitleElementPresent() {
 
@@ -83,6 +104,9 @@ public class SearchTests extends CoreTestCase
 
     }
 
+    @DisplayName("Compare titles and subtitles os search results")
+    @Description("First search results from the list matches expected titles/ and subtitles")
+    @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testTitleAndDescriptionInSearchResults()
     {

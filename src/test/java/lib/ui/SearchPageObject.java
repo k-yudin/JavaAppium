@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -47,44 +48,52 @@ abstract public class SearchPageObject extends MainPageObject
     }
     /* TEMPLATES METHODS */
 
+    @Step("Initialize search input process")
     public void initSearchInput()
     {
         this.waitForElementAndClick(SEARCH_INIT_ELEMENT, "Cannot find and click search init element", 5);
         this.waitForElementPresence(SEARCH_INIT_ELEMENT, "Cannot find search input after clicking search init element");
     }
 
+    @Step("Type search query: {0}")
     public void typeSearchLine(String search_line)
     {
         this.waitForElementAndSendKeys(SEARCH_INPUT, search_line, "Cannot find and type in the search input", 5);
     }
 
+    @Step("Wait for search result: {0}")
     public void waitForSearchResult(String substring)
     {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementPresence(search_result_xpath, "Cannot find search result with substring " + substring);
     }
 
+    @Step("Wait for cancel button to appear}")
     public void waitForCancelButtonToAppear()
     {
         this.waitForElementPresence(SEARCH_CANCEL_SEARCH, "Cannot find clear button", 5);
     }
 
+    @Step("Wait for cancel button to disappear")
     public void waitForCancelButtonToDisAppear()
     {
         this.waitForElementNotPresent(SEARCH_CANCEL_SEARCH, "Clear button is still present", 5);
     }
 
+    @Step("Tap to cancel search")
     public void clickCancelSearch()
     {
         this.waitForElementAndClick(SEARCH_CANCEL_SEARCH, "Cannot find and click clear button", 5);
     }
 
+    @Step("Tap on search result with subtitle: {0}")
     public void clickByArticleWithSubstring(String substring)
     {
         String search_result_xpath = getResultSearchElement(substring);
         this.waitForElementAndClick(search_result_xpath, "Cannot find and click search result with substring " + substring, 10);
     }
 
+    @Step("Get amount of found search results")
     public int getAmountOfFoundArticles()
     {
         this.waitForElementPresence(SEARCH_RESULT_ELEMENT,
@@ -94,26 +103,31 @@ abstract public class SearchPageObject extends MainPageObject
         return this.getAmountOfElements(SEARCH_RESULT_ELEMENT);
     }
 
+    @Step("Wait for the message that states that nothing was found")
     public void waitForEmptyResultsLabel()
     {
         this.waitForElementPresence(SEARCH_EMPTY_RESULT_ELEMENT, "Cannot find empty result element", 15);
     }
 
+    @Step("Verify that search results are absent")
     public void assertNoResultSearch()
     {
         this.assertElementNotPresent(SEARCH_RESULT_ELEMENT, "No results were found");
     }
 
+    @Step("Clear search input field")
     public void clearSearchInputField()
     {
         this.waitForElementAndClear(SEARCH_INPUT, "Cannot find search input field", 5);
     }
 
+    @Step("Tap on clear button to erase search query")
     public void tapToClearInputField()
     {
         this.waitForElementAndClick(SEARCH_CLEAR_BUTTON,"Cannot find and click clear button for the input field", 5);
     }
 
+    @Step("Get search result title by index {0} in search result list")
     public String getSearchResultTitleByIndex(int index)
     {
         String search_result_xpath = getTitleXPAthByIndexInSearch(index);
@@ -121,6 +135,7 @@ abstract public class SearchPageObject extends MainPageObject
         return element.getAttribute("name");
     }
 
+    @Step("Get search result subtitle by index {0} in search result list")
     public String getSearchResultDescByIndex(int index)
     {
         String search_result_xpath = getTitleDescriptionXPAthByIndexInSearch(index);
@@ -128,6 +143,7 @@ abstract public class SearchPageObject extends MainPageObject
         return element.getAttribute("name");
     }
 
+    @Step("Verify that search result with title {0} and subtitle {1} is displayed by index {2} in the list")
     public void compareSearchResultTitleAndDescriptionByIndexInSearch(String title, String description, int index_in_search)
     {
         String search_result_title = getSearchResultTitleByIndex(index_in_search);

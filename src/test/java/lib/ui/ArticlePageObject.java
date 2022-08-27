@@ -1,5 +1,6 @@
 package lib.ui;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import lib.Platform;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -29,16 +30,19 @@ abstract public class ArticlePageObject extends MainPageObject
         return EXISTING_FOLDER_NAME_TPL.replace("{FOLDER_NAME}", folder_name);
     }
 
+    @Step("Verify that title element is present")
     public WebElement waitForTitleElement()
     {
         return this.waitForElementPresence(ARTICLE_TITLE, "Cannot find article title", 15);
     }
 
+    @Step("Wait for saved title element")
     public WebElement waitForSavedTitleElement()
     {
         return this.waitForElementPresence(SAVED_ARTICLE_TITLE, "Cannot find article title", 15);
     }
 
+    @Step("Get article text")
     public String getArticleTitle()
     {
         WebElement title = waitForTitleElement();
@@ -54,6 +58,7 @@ abstract public class ArticlePageObject extends MainPageObject
             return title.getAttribute("name");
     }
 
+    @Step("Swipe to the end of article")
     public void swipeToFooter()
     {
         if(Platform.getInstance().isAndroid()) {
@@ -68,6 +73,7 @@ abstract public class ArticlePageObject extends MainPageObject
         }
     }
 
+    @Step("Add article to my list")
     public void addArticleToMyList(String name_of_folder)
     {
         this.waitForElementAndClick(OPTIONS_BUTTON,
@@ -96,6 +102,7 @@ abstract public class ArticlePageObject extends MainPageObject
                 5);
     }
 
+    @Step("Add article to existing folder: {0}")
     public void addArticleToExistingFolder(String folder_name)
     {
         this.waitForElementAndClick(OPTIONS_BUTTON,
@@ -111,6 +118,7 @@ abstract public class ArticlePageObject extends MainPageObject
                 15);
     }
 
+    @Step("Tap to close article")
     public void closeArticle()
     {
         if (Platform.getInstance().isAndroid() || Platform.getInstance().isIOS()) {
@@ -124,18 +132,21 @@ abstract public class ArticlePageObject extends MainPageObject
         }
     }
 
+    @Step("Get saved article title")
     public String getSavedArticleTitle()
     {
         WebElement title = waitForSavedTitleElement();
         return title.getAttribute("text");
     }
 
-     public void assertTitleElementPresent()
+    @Step("Verify that article title is displayed")
+    public void assertTitleElementPresent()
      {
          this.assertElementPresent(ARTICLE_TITLE, "Cannot find title element");
      }
 
-     public void addArticlesToMySaved()
+    @Step("Tap to add to saved")
+    public void addArticlesToMySaved()
      {
          if (Platform.getInstance().isMW())
          {
@@ -144,7 +155,8 @@ abstract public class ArticlePageObject extends MainPageObject
          this.waitForElementAndClick(OPTIONS_ADD_TO_MY_LIST_BUTTON, "Cannot find option to add article to the reading list", 5);
      }
 
-     public void removeArticleFromSavedIfAdded()
+    @Step("Remove article from saved if exists")
+    public void removeArticleFromSavedIfAdded()
      {
         if (this.isElementPresent(OPTIONS_REMOVE_FROM_MY_LIST_BUTTON))
         {
