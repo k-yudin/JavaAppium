@@ -59,7 +59,7 @@
                         <systemProperties>
                             <property>
                                 <name>allure.results.directory</name>
-                                <value>/Users/kyudin/.jenkins/workspace/iOS/allure-results</value>
+                                <value>${project.build.directory}/allure-results</value>
                             </property>
                         </systemProperties>
                         <argLine>
