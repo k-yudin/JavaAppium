@@ -61,6 +61,10 @@
                                 <name>allure.results.directory</name>
                                 <value>${project.build.directory}/allure-results</value>
                             </property>
+                            <property>
+                                <name>allure.results.directory</name>
+                                <value>/Users/kyudin/.jenkins/workspace/iOS/allure-results</value>
+                            </property>
                         </systemProperties>
                         <argLine>
                             -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
