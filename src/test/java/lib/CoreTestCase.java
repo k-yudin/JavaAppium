@@ -19,7 +19,7 @@ import java.time.Duration;
 public class CoreTestCase {
 
     protected RemoteWebDriver driver;
-    private SauceREST sauceClient = new SauceREST("sam17", "e256c465-7dd9-48e9-bc6c-953c6564a94b", DataCenter.EU);
+    private SauceREST sauceClient = new SauceREST(DriverProperties.sauceUser, DriverProperties.sauceKey, DataCenter.EU);
     private String sessionID;
     private String host = DriverProperties.getInstance().getHost();
 
@@ -107,6 +107,7 @@ public class CoreTestCase {
         protected void failed(Throwable e, Description description) {
             if (host.equals("saucelabs")) {
                 sauceClient.jobFailed(sessionID);
+                System.out.println(String.format("https://saucelabs.com/tests/%s", sessionID));
             }
         }
 
