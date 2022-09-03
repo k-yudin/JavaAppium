@@ -1,32 +1,52 @@
 package lib;
 
+import com.saucelabs.saucerest.DataCenter;
+import com.saucelabs.saucerest.SauceREST;
 import io.appium.java_client.AppiumDriver;
 import io.qameta.allure.Step;
-import junit.framework.TestCase;
+import lib.configs.DriverProperties;
 import lib.ui.WelcomePageObject;
+import org.junit.Rule;
+import org.junit.rules.ExternalResource;
+import org.junit.rules.TestName;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.time.Duration;
 
-public class CoreTestCase extends TestCase {
+public class CoreTestCase {
+
     protected RemoteWebDriver driver;
+    private SauceREST sauceClient = new SauceREST("sam17", "e256c465-7dd9-48e9-bc6c-953c6564a94b", DataCenter.EU);
+    private String sessionID;
+    private String host = DriverProperties.getInstance().getHost();
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-        driver = Platform.getInstance().getDriver();
-        this.rotateScreenPortrait();
-        this.skipWelcomeWindowForIOS();
-        //this.openWikiWebPageForMobileWeb();
-    }
+    @Rule
+    public SauceTestWatcher watcher = new SauceTestWatcher();
 
-    @Override
-    protected void tearDown() throws Exception {
-        printSessionIdAndTestName();
-        driver.quit();
-        super.tearDown();
-    }
+    @Rule
+    public TestName testName = new TestName();
+
+    @Rule
+    public ExternalResource resource = new ExternalResource() {
+
+        @Override
+        protected void before() throws Exception {
+            driver = Platform.getInstance().getDriver();
+            sessionID = driver.getSessionId().toString();
+            rotateScreenPortrait();
+            skipWelcomeWindowForIOS();
+            //this.openWikiWebPageForMobileWeb();
+        }
+
+        @Override
+        protected void after() {
+            printSessionIdAndTestName();
+            driver.quit();
+        }
+    };
 
     @Step("Rotate screen to portrait mode")
     protected void rotateScreenPortrait() {
@@ -78,7 +98,23 @@ public class CoreTestCase extends TestCase {
 
     private void printSessionIdAndTestName() {
         String message = String.format("SauceOnDemandSessionID=%1$s job-name=%2$s",
-                driver.getSessionId().toString(), getName());
+                sessionID, testName.getMethodName());
         System.out.println(message);
+    }
+
+    protected class SauceTestWatcher extends TestWatcher {
+        @Override
+        protected void failed(Throwable e, Description description) {
+            if (host.equals("saucelabs")) {
+                sauceClient.jobFailed(sessionID);
+            }
+        }
+
+        @Override
+        protected void succeeded(Description description) {
+            if (host.equals("saucelabs")) {
+                sauceClient.jobPassed(sessionID);
+            }
+        }
     }
 }
