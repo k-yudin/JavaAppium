@@ -19,7 +19,7 @@ import java.time.Duration;
 public class CoreTestCase {
 
     protected RemoteWebDriver driver;
-    private SauceREST sauceClient = new SauceREST(DriverProperties.sauceUser, DriverProperties.sauceKey, DataCenter.EU);
+    private SauceREST sauceClient;
     private String sessionID;
     private String host = DriverProperties.getInstance().getHost();
 
@@ -36,6 +36,7 @@ public class CoreTestCase {
         protected void before() throws Exception {
             driver = Platform.getInstance().getDriver();
             sessionID = driver.getSessionId().toString();
+            sauceClient = new SauceREST(DriverProperties.sauceUser, DriverProperties.sauceKey, DataCenter.EU);
             rotateScreenPortrait();
             skipWelcomeWindowForIOS();
             //this.openWikiWebPageForMobileWeb();
