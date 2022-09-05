@@ -7,10 +7,11 @@ import java.util.Properties;
 
 public class DriverProperties {
 
-    private static DriverProperties driverPropertiesHolder;
-    private Properties properties;
     public static final String sauceUser = System.getenv("SAUCE_USERNAME");
     public static final String sauceKey = System.getenv("SAUCE_ACCESS_KEY");
+
+    private static DriverProperties driverPropertiesHolder;
+    private Properties properties;
 
     public DriverProperties() {}
 
