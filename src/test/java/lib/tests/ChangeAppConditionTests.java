@@ -12,6 +12,7 @@ import lib.ui.SearchPageObject;
 import lib.ui.factories.ArticlePageObjectFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 @Epic("App Conditions Tests")
 public class ChangeAppConditionTests extends CoreTestCase

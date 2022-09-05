@@ -13,6 +13,7 @@ import lib.ui.factories.MyListsPageObjectFactory;
 import lib.ui.factories.NavigationUIFactory;
 import lib.ui.factories.SearchPageObjectFactory;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 @Epic("My List Tests")
 public class MyListTests extends CoreTestCase
