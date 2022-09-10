@@ -6,7 +6,6 @@ import lib.configs.DriverProperties;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
@@ -57,17 +56,27 @@ public class Platform
             throw new Exception("Cannot detect driver type. Platform value: " + this.getPlatformVar());
     }
 
-    private DesiredCapabilities getAndroidDesiredCapabilities()
+    private MutableCapabilities getAndroidDesiredCapabilities()
     {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformName","Android");
-        capabilities.setCapability("deviceName","AndroidTestDevice");
-        capabilities.setCapability("platformVersion","6.0");
-        capabilities.setCapability("automationName","Appium");
-        capabilities.setCapability("appPackage","org.wikipedia");
-        capabilities.setCapability("appActivity",".main.MainActivity");
-        capabilities.setCapability("orientation", "PORTRAIT");
-        capabilities.setCapability("app",DriverProperties.getInstance().getAppBinaryPath());
+        MutableCapabilities capabilities = new MutableCapabilities();
+        String host = DriverProperties.getInstance().getHost();
+        switch (host) {
+            case "saucelabs":
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("appium:deviceName", System.getenv("SELENIUM_DEVICE"));
+                capabilities.setCapability("appium:platformVersion", System.getenv("SELENIUM_VERSION"));
+                capabilities.setCapability("appium:deviceOrientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
+                capabilities.setCapability("appium:app", DriverProperties.getInstance().getAppBinaryPath());
+                capabilities.setCapability("build", System.getenv("SAUCE_BUILD_NAME"));
+                break;
+            case "local":
+                capabilities.setCapability("platformName", "Android");
+                capabilities.setCapability("deviceName", "emu2");
+                capabilities.setCapability("platformVersion", "8.1.0");
+                capabilities.setCapability("deviceOrientation", "PORTRAIT");
+                capabilities.setCapability("app", DriverProperties.getInstance().getAppBinaryPath());
+                break;
+        }
         return capabilities;
     }
 

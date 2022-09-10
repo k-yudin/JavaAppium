@@ -14,8 +14,8 @@ public class IOSSearchPageObject extends SearchPageObject
         SEARCH_EMPTY_RESULT_ELEMENT = "xpath://XCUIElementTypeStaticText[@name='No results found']";
         SEARCH_RESULT_BY_TITLE_AND_DESCRIPTION_TPL = "xpath://XCUIElementTypeLink[@name='{TITLE} {DESCRIPTION}')]";
         SEARCH_CLEAR_BUTTON = "id:Clear text";
-        SEARCH_RESULT_TITLE_TPL = "xpath://XCUIElementTypeApplication[@name='Wikipedia']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeCollectionView/XCUIElementTypeCell[{INDEX}]/XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
-        SEARCH_RESULT_DESCRIPTION_TPL = "xpath://XCUIElementTypeApplication[@name='Wikipedia']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeCollectionView/XCUIElementTypeCell[{INDEX}]/XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+        SEARCH_RESULT_TITLE_TPL = "xpath://XCUIElementTypeApplication[@name='Wikipedia']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeCollectionView/XCUIElementTypeCell[@index='{INDEX}']/XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+        SEARCH_RESULT_DESCRIPTION_TPL = "xpath://XCUIElementTypeApplication[@name='Wikipedia']/XCUIElementTypeWindow[1]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[2]/XCUIElementTypeCollectionView/XCUIElementTypeCell[@index='{INDEX}']/XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     }
 
     public IOSSearchPageObject(RemoteWebDriver driver)
