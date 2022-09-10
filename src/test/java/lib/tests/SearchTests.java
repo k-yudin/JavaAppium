@@ -106,7 +106,7 @@ public class SearchTests extends CoreTestCase
     }
 
     @DisplayName("Compare titles and subtitles os search results")
-    @Description("First search results from the list matches expected titles/ and subtitles")
+    @Description("First search results from the list matches expected titles and subtitles")
     @Severity(SeverityLevel.CRITICAL)
     @Test
     public void testTitleAndDescriptionInSearchResults()
@@ -115,8 +115,8 @@ public class SearchTests extends CoreTestCase
         searchPageObject.initSearchInput();
         searchPageObject.typeSearchLine("Japan");
 
-        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japan", "Island country in East Asia", 1);
-        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japanese language", "Language spoken in East Asia", 2);
-        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japan national football team", "Association football team", 3);
+        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japan", "Island country in East Asia", 0);
+        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japanese language", "Language spoken in East Asia", 1);
+        searchPageObject.compareSearchResultTitleAndDescriptionByIndexInSearch("Japan Self-Defense Forces", "Unified military forces of Japan", 2);
     }
 }
