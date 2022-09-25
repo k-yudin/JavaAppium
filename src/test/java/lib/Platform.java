@@ -91,7 +91,7 @@ public class Platform
                 capabilities.setCapability("appium:platformVersion", System.getenv("SELENIUM_VERSION"));
                 capabilities.setCapability("appium:deviceOrientation", System.getenv("SELENIUM_DEVICE_ORIENTATION"));
                 capabilities.setCapability("appium:app", DriverProperties.getInstance().getAppBinaryPath());
-                capabilities.setCapability("build", System.getenv("SAUCE_BUILD_NAME"));
+                capabilities.setCapability("build", System.getenv("SAUCE_TC_BUILDNUMBER"));
                 break;
             case "local":
                 capabilities.setCapability("platformName", "iOS");
